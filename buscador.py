@@ -8,17 +8,17 @@ cep = input("Digite o CEP: ")
 cep = cep.replace("-", "")
 
 # Testa se o CEP tem exatamente 8 números
-if len(cep) < 8 and len(cep) > 8:
+if len(cep) < 8 or len(cep) > 8:
     print("Erro: o CEP deve ter exatamente 8 números")
 else:
     # Faz a consulta do CEP via API e retorna no formato JSON em uma váriável
-    busca_cep = re.get(f"https://cep.awesomeapi.com.br/json/{cep}").json()
+    busca_cep = re.get(f"https://viacep.com.br/ws/{cep}/json/").json()
 
     # Separamos os dados que queremos em variáveis separadas
-    rua = busca_cep['address_name']
-    bairro = busca_cep['district']
-    cidade = busca_cep['city']
-    estado = busca_cep['state']
+    rua = busca_cep['logradouro']
+    bairro = busca_cep['bairro']
+    cidade = busca_cep['localidade']
+    estado = busca_cep['uf']
 
     # Imprime os dados que queremos separados
     print("Rua: " + rua)
